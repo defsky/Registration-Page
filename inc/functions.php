@@ -59,27 +59,29 @@ function Register()
 			$email      = $_POST['email'];
 			$password   = $_POST['password'];
 			$repassword = $_POST['re-password'];
-			$captcha    = $_POST['g-recaptcha-response'];
+			//$captcha    = $_POST['g-recaptcha-response'];
+			$captcha    = $_POST['captcha'];
 			$ip_address = $_SERVER['REMOTE_ADDR'];
 			$secret     = CAPTCHA_SECRET;
 			$expansion  = EXPANSION;
 
 			if(ValidateUsername($username) && ValidateEmail($email))
 			{
-				$data = $con->prepare('SELECT COUNT(*) FROM account WHERE username = :username OR email = :email');
+				$data = $con->prepare('SELECT COUNT(*) FROM account WHERE username = :username');// OR email = :email');
 				$data->execute(array(
-					':username' => $username,
-					':email'    => $email
+					':username' => $username
+					//,':email'    => $email
 				));
 
 				if($data->fetchColumn() == 0)
 				{
-					if(Captcha($secret, $captcha, $ip_address))
+					//if(Captcha($secret, $captcha, $ip_address))
+					if(strtolower($_SESSION["captcha"]) == strtolower($captcha))
 					{
 						$data = $con->prepare('INSERT INTO account (username, sha_pass_hash, email, last_ip, expansion) 
 							VALUES(:username, :password, :email, :ip, :expansion)');
 						$data->execute(array(
-							':username'  => $username,
+							':username'  => strtoupper($username),
 							':password'  => sha1(strtoupper($username) . ':' . strtoupper($password)),
 							':email'     => $email,
 							':ip'        => $ip_address,
@@ -91,22 +93,22 @@ function Register()
 					}
 					else
 					{
-						echo '<div class="callout alert">Capctha was invalid!</div>';
+						echo '<div class="callout alert">验证码错误!</div>';
 					}
 				}
 				else
 				{
-					echo '<div class="callout alert">Username or Email is already in use!</div>';
+					echo '<div class="callout alert">用户名已被注册!</div>';
 				}
 			}
 			else
 			{
-				echo '<div class="callout alert">Username or Email is not valid!</div>';
+				echo '<div class="callout alert">用户名或邮件地址的格式无效!</div>';
 			}
 		}
 		else
 		{
-			echo '<div class="callout alert">All fields are required!</div>';
+			echo '<div class="callout alert">所有栏目都不能留空!</div>';
 		}
 	}
 }
