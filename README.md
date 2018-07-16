@@ -5,10 +5,8 @@
 修改 Inc/settings.php 配置数据库地址、账号和密码。
 
 ## 效果图
-![Preview](https://puu.sh/xwIms/233d6cc51f.jpg)
+![Preview](https://github.com/defsky/Registration-Page/blob/master/screenshots/screenshot01.jpg)
 
 ## Registration Page
 A MultiCore Supported Registration page
 
-## Screenshots
-![Preview](https://puu.sh/xwIms/233d6cc51f.jpg)
