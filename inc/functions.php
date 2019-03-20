@@ -78,15 +78,33 @@ function Register()
 					//if(Captcha($secret, $captcha, $ip_address))
 					if(strtolower($_SESSION["captcha"]) == strtolower($captcha))
 					{
-						$data = $con->prepare('INSERT INTO account (username, sha_pass_hash, email, last_ip, expansion) 
-							VALUES(:username, :password, :email, :ip, :expansion)');
-						$data->execute(array(
-							':username'  => strtoupper($username),
-							':password'  => sha1(strtoupper($username) . ':' . strtoupper($password)),
-							':email'     => $email,
-							':ip'        => $ip_address,
-							':expansion' => $expansion
-						));
+                        try {
+                            $con->beginTransaction();
+                          
+                            $data = $con->prepare('INSERT INTO account (username, sha_pass_hash, email, last_ip, expansion)
+                                            VALUES(:username, :password, :email, :ip, :expansion)');
+                            $data->execute(array( ':username'  => strtoupper($username),
+                                                  ':password'  => sha1(strtoupper($username) . ':' . strtoupper($password)),
+                                                   ':email'     => $email,
+                                                    ':ip'        => $ip_address,
+                                                     ':expansion' => $expansion
+                                                  ));
+                           
+                            $data = $con->prepare('SELECT id FROM account WHERE username = :username');
+                            $data->execute(array(':username' => strtoupper($username)));
+                            $result = $data->fetchAll(PDO::FETCH_ASSOC);
+                            $userid = $result[0]['id'];
+                           
+                            $data = $con->prepare('INSERT INTO account_billing_plan (id, PlanType, PlanTIme)
+                                                    VALUES(:id, :PlanType, :PlanTime)');
+                            $data->execute(array( ':id' => $userid,
+                                                  ':PlanType' => 16,
+                                                  ':PlanTime' => 120000));
+                           
+                            $con->commit();
+                        } catch (Exception $e) {
+                               $con->rollBack();
+                        }
 
 						echo '<div class="callout success">' . SUCCESS_MESSAGE . '</div>';
 						echo '<div class="callout warning">' . REALMLIST . '</div>';

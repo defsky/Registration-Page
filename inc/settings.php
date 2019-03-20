@@ -1,10 +1,10 @@
 <?php
 
 $config = array(
-    'HOST' => 'localhost',
+    'HOST' => '6530b',
     'USER' => 'root',
-    'PASS' => 'root',
-    'DB'   => 'auth',
+    'PASS' => 'mysql',
+    'DB'   => 'realm',
     'CORE' => ''
 );
 

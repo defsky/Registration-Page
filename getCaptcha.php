@@ -8,6 +8,7 @@
 
 // 开启session
 
+ob_clean();
 session_start();
 
 //1.创建黑色画布

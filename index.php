@@ -27,7 +27,7 @@ session_start();
 <div class="row">
 	<div class="content">
 		<div class="content-logo">
-			时光<span class="orange">之穴</span>
+			熔火<span class="orange">之心</span>
 		</div>
 
 		<div class="content-box">
@@ -51,7 +51,7 @@ session_start();
 					<center>
 						<!--<div class="g-recaptcha" data-sitekey="<?php echo CAPTCHA_CLIENT_ID; ?>"></div>
 						<br>-->
-						<img src="getCaptcha.php"  onclick="this.src='getCaptcha.php?'+new Date().getTime();" width="200" height="200"><br/>
+						<img id="captcha" src="img/captcha.png"  onclick="refreshCaptcha()" width="200" height="200"><br/>
 						<br>
 						<input type="submit" name="register" class="small button" value="注册" />
 					</center>
@@ -71,5 +71,11 @@ session_start();
 <script type="text/javascript" src="js/vendor/foundation.js"></script>
 <script type="text/javascript" src="js/app.js"></script>
 <!-- <script type="text/javascript" src='https://www.google.com/recaptcha/api.js'></script> -->
+<script>
+function refreshCaptcha() {
+    $('#captcha').attr('src', 'getCaptcha.php?' + (new Date()).getTime());
+}
+refreshCaptcha();
+</script>
 </body>
 </html>
