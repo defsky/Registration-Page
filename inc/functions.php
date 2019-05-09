@@ -90,16 +90,16 @@ function Register()
                                                      ':expansion' => $expansion
                                                   ));
                            
-                            $data = $con->prepare('SELECT id FROM account WHERE username = :username');
-                            $data->execute(array(':username' => strtoupper($username)));
-                            $result = $data->fetchAll(PDO::FETCH_ASSOC);
-                            $userid = $result[0]['id'];
+                            //$data = $con->prepare('SELECT id FROM account WHERE username = :username');
+                            //$data->execute(array(':username' => strtoupper($username)));
+                            //$result = $data->fetchAll(PDO::FETCH_ASSOC);
+                            //$userid = $result[0]['id'];
                            
-                            $data = $con->prepare('INSERT INTO account_billing_plan (id, PlanType, PlanTIme)
-                                                    VALUES(:id, :PlanType, :PlanTime)');
-                            $data->execute(array( ':id' => $userid,
-                                                  ':PlanType' => 16,
-                                                  ':PlanTime' => 120000));
+                            //$data = $con->prepare('INSERT INTO account_billing_plan (id, PlanType, PlanTIme)
+                            //                        VALUES(:id, :PlanType, :PlanTime)');
+                            //$data->execute(array( ':id' => $userid,
+                            //                      ':PlanType' => 16,
+                            //                      ':PlanTime' => 120000));
                            
                             $con->commit();
                         } catch (Exception $e) {
