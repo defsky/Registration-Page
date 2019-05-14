@@ -72,6 +72,9 @@ session_start();
 <script type="text/javascript" src="js/app.js"></script>
 <!-- <script type="text/javascript" src='https://www.google.com/recaptcha/api.js'></script> -->
 <script>
+$(document).ready(function(){
+    $("html,body").css("background","url(./img/bg-hd.jpg) no-repeat center center fixed");
+});
 function refreshCaptcha() {
     $('#captcha').attr('src', 'getCaptcha.php?' + (new Date()).getTime());
 }

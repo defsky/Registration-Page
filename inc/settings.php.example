@@ -4,14 +4,14 @@ $config = array(
     'HOST' => 'localhost',
     'USER' => 'root',
     'PASS' => 'root',
-    'DB'   => 'realmd_lh_new',
+    'DB'   => 'realm',
     'CORE' => ''
 );
 
 
 // General Settings
 define('EXPANSION', 2); // 1 = Vanilla / 2 = TBC / 3 = WOTLK
-define('REALMLIST', 'set realmlist login.afkplayer.com');
+define('REALMLIST', 'set realmlist 127.0.0.1');
 
 // Google ReCaptcha Settings
 define('CAPTCHA_SECRET', '');
