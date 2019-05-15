@@ -60,6 +60,7 @@ session_start();
 		</div>
 
 		<div class="response">
+            <div>登录器<a style="font-weight:bold;" href="AFKPlayer.Launcher.zip">下载</a>&nbsp;&nbsp;&nbsp;&nbsp;客户端版本支持 1.12.1(5875)</div>
 			<?php Register(); ?>
 		</div>
 	</div>
@@ -72,9 +73,6 @@ session_start();
 <script type="text/javascript" src="js/app.js"></script>
 <!-- <script type="text/javascript" src='https://www.google.com/recaptcha/api.js'></script> -->
 <script>
-$(document).ready(function(){
-    $("html,body").css("background","url(./img/bg-hd.jpg) no-repeat center center fixed");
-});
 function refreshCaptcha() {
     $('#captcha').attr('src', 'getCaptcha.php?' + (new Date()).getTime());
 }
